@@ -145,7 +145,52 @@ http_server.serve_forever()p</pre>
 <p>組立件</p>
 <p>(SLVS)                                                                (STL)</p>
 <p><a href="/downloads/組立件.zip">組立件.zip</a>                                                             <a href="/downloads/組立件.stl">組立件.stl</a></p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Hh3jk0R61qg?si=lU6WG0dZeGQfjAQ0" title="YouTube video player" width="560"></iframe></p><h3>w7</h3>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Hh3jk0R61qg?si=lU6WG0dZeGQfjAQ0" title="YouTube video player" width="560"></iframe></p>
+<h3>w14</h3>
+<p>組合件由41223211組立，本人負責運動的部分。</p>
+<p><a href="/downloads/the.zip">此為ttt檔</a></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6_vP-4wkNkc?si=jO1LOoePp7zbBCm7" title="YouTube video player" width="560"></iframe></p>
+<p>此為運動部分。</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install pyzmq cbor keyboard
+from coppeliasim_zmqremoteapi_client import RemoteAPIClient
+import keyboard
+
+# Connecting to the CoppeliaSim server
+client = RemoteAPIClient('localhost', 23000)
+
+print('Program started')
+sim = client.getObject('sim')
+
+# Get the handle for the slider (prismatic joint)
+slider = sim.getObject('/Prismatic_joint')
+
+# Starting the simulation
+sim.startSimulation()
+print('Simulation started')
+
+# Main control loop
+def main():
+    # Keep running until simulation is stopped
+    while True:
+        if keyboard.is_pressed('w'):  # Move slider to -0.15 position
+            print("w is pressed")
+            sim.setJointTargetPosition(slider, -0.15)
+        
+        if keyboard.is_pressed('s'):  # Reset slider to the original position
+            print("s is pressed")
+            sim.setJointTargetPosition(slider, 0.0)  # Reset to the initial position
+
+        if keyboard.is_pressed('q'):  # Stop the simulation when 'q' is pressed
+            print("q is pressed - stopping simulation")
+            sim.stopSimulation()
+            break
+
+# Start the main control loop
+main()
+</pre>
+<p></p>
+<p>使用W與S控制運動。</p>
+<p></p><h3>w7</h3>
 <p>零件1.</p>
 <p><img alt="" height="207" src="/images/螢幕擷取畫面 2024-10-25 142801.png" width="213"/></p>
 <p><img alt="" height="214" src="/images/螢幕擷取畫面 2024-10-11 150119.png" width="241"/></p>
